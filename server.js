@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const greeting = process.env.greeting || "Hello from your deployed app!"
+const greeting = process.env.GREETING || "Hello from Render!"
 
 app.use(express.json());
 
