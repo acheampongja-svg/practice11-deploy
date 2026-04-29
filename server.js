@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const greeting = process.env.greeting || "Hello from your deployed app!"
 
 app.use(express.json());
 
@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
 });
 // GET route
 app.get('/api/message', (req, res) => {
-  res.json({ message: "Hello from your very first API!" });
+  res.json({ message: greeting });
 });
 
 // NEW POST route
