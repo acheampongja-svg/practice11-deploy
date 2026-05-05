@@ -3,29 +3,36 @@ const app = express();
 const greeting = process.env.GREETING || "Hello from Render!"
 
 app.use(express.json());
-
+app.use(express.static(__dirname));
 app.get("/", (req, res) => {
   res.send("My app is running!");
 });
 // GET route
-app.get('/api/message', (req, res) => {
-  res.json({ message: greeting });
+let items = [];
+
+// GET all items
+app.get('/api/items', (req, res) => {
+  res.json(items);
 });
 
-// NEW POST route
-app.post('/api/notes', (req, res) => {
-  const { name, note } = req.body;
+// POST a new item
+app.post('/api/items', (req, res) => {
+  const { name } = req.body;
 
-  if (!name || !note) {
+  if (!name) {
     return res.status(400).json({
-      error: "Both name and note are required."
+      error: "Name is required"
     });
   }
 
-  res.status(201).json({
-    message: "Note received!",
-    data: { name, note }
-  });
+  const newItem = {
+    id: items.length + 1,
+    name
+  };
+
+  items.push(newItem);
+
+  res.status(201).json(newItem);
 });
 
 // server
