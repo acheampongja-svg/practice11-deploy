@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = "https://practice11-deploy.onrender.com";
 
 async function loadItems() {
   const status = document.getElementById("status");
